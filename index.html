@@ -59,6 +59,30 @@
     margin: 0;
   }
 
+  .badge-row {
+    display: flex;
+    gap: 14px;
+    margin-top: 32px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: badgeIn 0.7s ease 0.15s forwards;
+  }
+  .badge {
+    width: 44px; height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .badge svg { width: 22px; height: 22px; }
+  @keyframes badgeIn { to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .badge-row { animation: none; opacity: 1; transform: none; }
+  }
+
   section.intro { padding: 48px 0; border-bottom: 1px solid var(--line); }
   section.intro p { max-width: 68ch; color: var(--text); font-size: 1rem; }
   section.intro p + p { margin-top: 14px; }
@@ -138,6 +162,49 @@
     padding: 48px 0 80px;
     border-top: 1px solid var(--line);
   }
+
+  section.match {
+    padding: 8px 0 48px;
+    border-top: 1px solid var(--line);
+  }
+  section.match h2 { font-size: 1.4rem; margin: 48px 0 10px; }
+  section.match > .wrap > p.hint { color: var(--muted); font-size: 0.95rem; margin: 0 0 22px; }
+  select#caseSelect {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.97rem;
+    padding: 13px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  select#caseSelect:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+  .match-result {
+    margin-top: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 20px 22px;
+    display: none;
+  }
+  .match-result.show { display: block; }
+  .match-result .tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .match-result .tag {
+    font-size: 0.8rem;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 4px 12px;
+  }
+  .match-result p { margin: 0; color: var(--text); font-size: 0.95rem; }
   section.reflect h2 { font-size: 1.4rem; margin: 0 0 14px; }
   section.reflect p { color: var(--muted); max-width: 62ch; margin: 0 0 24px; }
 
@@ -206,6 +273,13 @@
     <div class="kicker">Pancasila &amp; IPTEK</div>
     <h1 class="display">Lima sila, satu arah bagi ilmu pengetahuan dan teknologi Indonesia</h1>
     <p class="lede">IPTEK yang maju tanpa arah nilai bisa menjauhkan manusia dari kemanusiaannya sendiri. Pancasila bukan penghambat kemajuan — ia adalah kompas yang menjaga agar teknologi tetap melayani manusia, bukan sebaliknya.</p>
+    <div class="badge-row" aria-hidden="true">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l2.4 6.8H21l-5.6 4.2 2.2 7L12 15.8 6.4 20l2.2-7L3 8.8h6.6z"/></svg></span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="8" height="12" rx="4"/><rect x="11" y="4" width="8" height="12" rx="4"/></svg></span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="6"/><path d="M12 14v7M9 21h6M12 14l-3 3M12 14l3 3"/></svg></span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5c2 3 2 6 0 9M20 5c-2 3-2 6 0 9"/><path d="M8 10a4 4 0 018 0c0 3-1.5 5-4 5s-4-2-4-5z"/></svg></span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 21V9M7 9c-2-1-3-3-2-5 2 1 3 3 2 5zM7 9c2-1 3-3 2-5-2 1-3 3-2 5z"/><circle cx="17" cy="7" r="2"/><circle cx="15" cy="11" r="2"/><circle cx="19" cy="11" r="2"/><path d="M17 13v8"/></svg></span>
+    </div>
   </div>
 </header>
 
@@ -297,6 +371,25 @@
   </div>
 </section>
 
+<section class="match">
+  <div class="wrap">
+    <h2 class="display">Cocokkan kasus nyata</h2>
+    <p class="hint">Pilih satu situasi teknologi yang sering terjadi, lihat sila mana yang paling relevan dan kenapa.</p>
+    <select id="caseSelect">
+      <option value="">— Pilih sebuah kasus —</option>
+      <option value="ai-medis">Startup AI mendeteksi penyakit dari foto kulit, tapi butuh jutaan data pasien</option>
+      <option value="desa-digital">Aplikasi belajar coding gratis dikembangkan untuk siswa di daerah 3T</option>
+      <option value="hoaks">Teknologi AI generatif dipakai menyebar hoaks menjelang pemilu</option>
+      <option value="alat-mahal">Robot pertanian canggih yang harganya cuma terjangkau korporasi besar</option>
+      <option value="pangan">Uji coba bibit pangan hasil rekayasa genetika tanpa sosialisasi ke publik</option>
+    </select>
+    <div class="match-result" id="matchResult">
+      <div class="tags" id="matchTags"></div>
+      <p id="matchText"></p>
+    </div>
+  </div>
+</section>
+
 <section class="reflect">
   <div class="wrap">
     <h2 class="display">Refleksi singkat</h2>
@@ -346,6 +439,52 @@
           });
         }
       });
+    });
+
+    // Case matcher
+    var cases = {
+      'ai-medis': {
+        tags: ['Sila 1', 'Sila 2'],
+        text: 'Data kesehatan menyangkut martabat dan privasi pasien (Sila 2), sekaligus menuntut tanggung jawab etis peneliti agar data tidak disalahgunakan (Sila 1). Solusinya: consent eksplisit dari pasien dan anonimisasi data sebelum dipakai melatih model.'
+      },
+      'desa-digital': {
+        tags: ['Sila 3', 'Sila 5'],
+        text: 'Ini soal pemerataan — teknologi tidak boleh hanya menguntungkan kota besar (Sila 3), dan aksesnya harus adil bagi anak-anak di daerah tertinggal (Sila 5). Program seperti internet desa dan beasiswa digital lahir dari semangat ini.'
+      },
+      'hoaks': {
+        tags: ['Sila 4', 'Sila 2'],
+        text: 'Penyalahgunaan AI untuk disinformasi merusak proses musyawarah demokratis (Sila 4) dan martabat orang yang dijadikan target (Sila 2). Solusinya butuh regulasi yang dibahas bersama, bukan cuma keputusan sepihak platform teknologi.'
+      },
+      'alat-mahal': {
+        tags: ['Sila 5'],
+        text: 'Kalau hanya korporasi besar yang mampu membeli, petani kecil tertinggal dan kesenjangan makin lebar — bertentangan dengan keadilan sosial. Solusinya: subsidi alat, skema sewa bersama antar-petani, atau versi teknologi yang lebih murah.'
+      },
+      'pangan': {
+        tags: ['Sila 1', 'Sila 4'],
+        text: 'Rekayasa genetika perlu kajian etis mendalam sebelum diterapkan (Sila 1), dan masyarakat berhak dilibatkan lewat sosialisasi serta uji publik sebelum keputusan diambil (Sila 4) — bukan diputuskan diam-diam oleh segelintir pihak.'
+      }
+    };
+
+    var select = document.getElementById('caseSelect');
+    var result = document.getElementById('matchResult');
+    var tagsEl = document.getElementById('matchTags');
+    var textEl = document.getElementById('matchText');
+
+    select.addEventListener('change', function () {
+      var data = cases[select.value];
+      if (!data) {
+        result.classList.remove('show');
+        return;
+      }
+      tagsEl.innerHTML = '';
+      data.tags.forEach(function (t) {
+        var span = document.createElement('span');
+        span.className = 'tag';
+        span.textContent = t;
+        tagsEl.appendChild(span);
+      });
+      textEl.textContent = data.text;
+      result.classList.add('show');
     });
   })();
 </script>
