@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pancasila sebagai Landasan Pengembangan IPTEK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14171B;
+    --surface: #1E2329;
+    --surface-2: #262C33;
+    --gold: #C9A227;
+    --red: #B0393F;
+    --text: #EDE6D6;
+    --muted: #9AA0A6;
+    --line: #33383F;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+  h1, h2, h3, .display { font-family: 'Fraunces', Georgia, serif; }
+
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+  header.hero {
+    padding: 72px 0 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  .kicker {
+    color: var(--gold);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 18px;
+  }
+  h1.display {
+    font-size: clamp(2rem, 5.5vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0 0 20px;
+    max-width: 14ch;
+  }
+  .lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  section.intro { padding: 48px 0; border-bottom: 1px solid var(--line); }
+  section.intro p { max-width: 68ch; color: var(--text); font-size: 1rem; }
+  section.intro p + p { margin-top: 14px; }
+
+  section.sila { padding: 48px 0 16px; }
+  section.sila h2 { font-size: 1.5rem; font-weight: 600; margin: 0 0 8px; }
+  section.sila > .wrap > p.hint { color: var(--muted); font-size: 0.95rem; margin: 0 0 28px; }
+
+  .accordion { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
+
+  .item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .item[open] { border-color: var(--gold); }
+
+  .item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .item summary::-webkit-details-marker { display: none; }
+
+  .num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    min-width: 2ch;
+    flex-shrink: 0;
+  }
+  .icon {
+    width: 34px; height: 34px;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .icon svg { width: 100%; height: 100%; }
+
+  .sila-title { flex: 1; }
+  .sila-title .name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    display: block;
+  }
+  .chev {
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .item[open] .chev { transform: rotate(180deg); }
+
+  .item .body {
+    padding: 0 22px 26px 74px;
+  }
+  .item .body p { margin: 0 0 12px; color: var(--text); font-size: 0.97rem; }
+  .item .body .label {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 18px 0 6px;
+  }
+  .item .body .example {
+    background: var(--surface-2);
+    border-left: 2px solid var(--red);
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  section.reflect {
+    padding: 48px 0 80px;
+    border-top: 1px solid var(--line);
+  }
+  section.reflect h2 { font-size: 1.4rem; margin: 0 0 14px; }
+  section.reflect p { color: var(--muted); max-width: 62ch; margin: 0 0 24px; }
+
+  .prompt-box {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 24px;
+  }
+  .prompt-box p.q { color: var(--text); font-size: 1rem; margin: 0 0 16px; }
+  textarea {
+    width: 100%;
+    min-height: 90px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    padding: 12px 14px;
+    resize: vertical;
+  }
+  textarea:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+  .save-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    gap: 12px;
+  }
+  .save-row button {
+    background: var(--gold);
+    color: #14171B;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 10px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .save-row button:hover { opacity: 0.9; }
+  .save-row .status { color: var(--muted); font-size: 0.85rem; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 28px 0 48px;
+  }
+
+  @media (max-width: 520px) {
+    .item .body { padding-left: 22px; }
+    header.hero { padding: 56px 0 36px; }
+  }
+
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    .chev { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Pancasila &amp; IPTEK</div>
+    <h1 class="display">Lima sila, satu arah bagi ilmu pengetahuan dan teknologi Indonesia</h1>
+    <p class="lede">IPTEK yang maju tanpa arah nilai bisa menjauhkan manusia dari kemanusiaannya sendiri. Pancasila bukan penghambat kemajuan — ia adalah kompas yang menjaga agar teknologi tetap melayani manusia, bukan sebaliknya.</p>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <p>Di banyak negara, pengembangan teknologi sering terjebak pada satu pertanyaan saja: <em>bisa atau tidak?</em> Padahal pertanyaan yang lebih penting adalah <em>untuk siapa, dan dengan cara apa?</em> Pancasila menjawab pertanyaan kedua itu.</p>
+    <p>Sebagai dasar negara sekaligus pandangan hidup, kelima sila memberi arah nilai pada setiap keputusan riset dan inovasi — dari laboratorium kampus hingga kebijakan digital nasional. Klik tiap sila di bawah untuk melihat bagaimana nilainya diterjemahkan ke praktik nyata.</p>
+  </div>
+</section>
+
+<section class="sila">
+  <div class="wrap">
+    <h2>Menelusuri lima sila</h2>
+    <p class="hint">Ketuk salah satu untuk membuka penjelasan dan contoh penerapannya.</p>
+
+    <div class="accordion">
+
+      <details class="item">
+        <summary>
+          <span class="num">1</span>
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l2.4 6.8H21l-5.6 4.2 2.2 7L12 15.8 6.4 20l2.2-7L3 8.8h6.6z"/></svg></span>
+          <span class="sila-title"><span class="name">Ketuhanan Yang Maha Esa</span></span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="body">
+          <p>IPTEK dikembangkan dengan tetap menjunjung etika dan tanggung jawab moral — bukan sekadar karena "bisa dilakukan", tapi karena layak dilakukan. Riset yang mengabaikan nilai spiritual dan etis mudah berujung pada penyalahgunaan.</p>
+          <div class="label">CONTOH NYATA</div>
+          <div class="example">Pedoman etika AI dan bioetika riset genetika di Indonesia mewajibkan kajian dampak moral sebelum teknologi seperti rekayasa genetik atau kecerdasan buatan diterapkan secara luas.</div>
+        </div>
+      </details>
+
+      <details class="item">
+        <summary>
+          <span class="num">2</span>
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="7" r="3.4"/><path d="M5 21c0-4 3-6.5 7-6.5S19 17 19 21"/></svg></span>
+          <span class="sila-title"><span class="name">Kemanusiaan yang Adil dan Beradab</span></span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="body">
+          <p>Teknologi harus menghormati martabat manusia, bukan mengeksploitasi data atau tenaga penggunanya. Prinsip ini menuntut IPTEK yang inklusif, aman, dan tidak diskriminatif dalam cara kerjanya.</p>
+          <div class="label">CONTOH NYATA</div>
+          <div class="example">Undang-Undang Perlindungan Data Pribadi (UU PDP) dan teknologi assistive bagi penyandang disabilitas — seperti alat bantu baca layar dan prostetik cerdas — lahir dari prinsip ini.</div>
+        </div>
+      </details>
+
+      <details class="item">
+        <summary>
+          <span class="num">3</span>
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/><path d="M10 12h4"/></svg></span>
+          <span class="sila-title"><span class="name">Persatuan Indonesia</span></span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="body">
+          <p>IPTEK harus menjadi alat pemerataan, bukan pelebar kesenjangan. Negara kepulauan seperti Indonesia berisiko besar mengalami kesenjangan digital antara kota besar dan daerah terpencil jika pembangunan teknologi tidak disebar merata.</p>
+          <div class="label">CONTOH NYATA</div>
+          <div class="example">Program internet desa (BAKTI Kominfo) dan pengembangan aplikasi digital berbasis bahasa daerah membantu menyatukan akses teknologi dari Sabang sampai Merauke.</div>
+        </div>
+      </details>
+
+      <details class="item">
+        <summary>
+          <span class="num">4</span>
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 18v-3a4 4 0 014-4h8a4 4 0 014 4v3"/><circle cx="12" cy="7" r="3"/></svg></span>
+          <span class="sila-title"><span class="name">Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan</span></span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="body">
+          <p>Kebijakan dan arah riset IPTEK idealnya lahir dari musyawarah — melibatkan ilmuwan, pemerintah, dan masyarakat — bukan keputusan sepihak segelintir pihak yang berkuasa atau bermodal besar.</p>
+          <div class="label">CONTOH NYATA</div>
+          <div class="example">Uji publik rancangan kebijakan teknologi, riset kolaboratif universitas-masyarakat (participatory research), serta pembahasan regulasi digital bersama DPR sebelum disahkan.</div>
+        </div>
+      </details>
+
+      <details class="item">
+        <summary>
+          <span class="num">5</span>
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M6 7l-3 6a3 3 0 006 0zM21 13a3 3 0 01-6 0l3-6zM4 7h16M9 3h6"/></svg></span>
+          <span class="sila-title"><span class="name">Keadilan Sosial bagi Seluruh Rakyat Indonesia</span></span>
+          <span class="chev">▾</span>
+        </summary>
+        <div class="body">
+          <p>Manfaat IPTEK harus bisa dirasakan semua lapisan masyarakat, bukan hanya kalangan yang mampu membayar mahal. Keadilan sosial menuntut teknologi yang terjangkau dan tepat guna.</p>
+          <div class="label">CONTOH NYATA</div>
+          <div class="example">Teknologi pertanian murah untuk petani kecil (alat sensor tanah sederhana, aplikasi cuaca gratis) dan layanan telemedicine yang menjangkau daerah dengan akses fasilitas kesehatan terbatas.</div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<section class="reflect">
+  <div class="wrap">
+    <h2 class="display">Refleksi singkat</h2>
+    <p>Kalau kamu sedang mengerjakan proyek, riset, atau ide teknologi — coba tuliskan satu kalimat: sila mana yang paling relevan dengan proyekmu, dan kenapa? Catatan ini tersimpan otomatis di perangkatmu.</p>
+    <div class="prompt-box">
+      <p class="q">Bagaimana Pancasila relevan dengan proyek atau ide IPTEK yang sedang kamu kerjakan?</p>
+      <textarea id="reflection" placeholder="Tulis refleksimu di sini..."></textarea>
+      <div class="save-row">
+        <button id="saveBtn" type="button">Simpan catatan</button>
+        <span class="status" id="status"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Disusun sebagai bahan edukasi terbuka tentang Pancasila dan pengembangan IPTEK.</footer>
+
+<script>
+  (function () {
+    var KEY = 'pancasila-iptek-reflection';
+    var textarea = document.getElementById('reflection');
+    var btn = document.getElementById('saveBtn');
+    var status = document.getElementById('status');
+
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved) textarea.value = saved;
+    } catch (e) {}
+
+    btn.addEventListener('click', function () {
+      try {
+        localStorage.setItem(KEY, textarea.value);
+        status.textContent = 'Tersimpan ✓';
+        setTimeout(function () { status.textContent = ''; }, 2000);
+      } catch (e) {
+        status.textContent = 'Gagal menyimpan';
+      }
+    });
+
+    // Accordion: keep only one open at a time
+    var items = document.querySelectorAll('.item');
+    items.forEach(function (item) {
+      item.addEventListener('toggle', function () {
+        if (item.open) {
+          items.forEach(function (other) {
+            if (other !== item) other.open = false;
+          });
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
